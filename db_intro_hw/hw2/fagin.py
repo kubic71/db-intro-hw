@@ -1,5 +1,5 @@
 from typing import List, Any
-from dataclasses import dataclass
+from db_intro_hw.hw2 import Record
 from db_intro_hw.hw1 import DATA_RECORDS
 
 
@@ -8,10 +8,6 @@ def LSB(n: int, k: int):
     return (2**k - 1) & n
 
 
-@dataclass
-class Record:
-    key: int
-    data: Any
 
 class Page:
     PAGE_SIZE = 3
@@ -118,4 +114,4 @@ if __name__ == "__main__":
     print("\n\nRecords lookup:")
     for rec in DATA_RECORDS:
         print(f"Searching for age={rec.age}")
-        print(fagin.find(rec.age))
+        print(fagin.find(rec.age).data)

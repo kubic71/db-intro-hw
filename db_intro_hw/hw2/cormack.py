@@ -1,4 +1,5 @@
 from typing import Any, Iterator, List, Tuple
+from db_intro_hw.hw2 import Record
 from dataclasses import dataclass
 
 
@@ -12,16 +13,6 @@ def h(k: int):
     k % DIRECTORY_SIZE
 
 
-@dataclass
-class PrimaryFileRecord:
-    """Our data record saved in primary file"""
-
-    # key, which is an output of some generic hash function
-    # it may have collissions across our data, but Cormack handles that
-    key: int
-
-    # data payload
-    data: Any
 
 @dataclass
 class Bucket:
@@ -35,7 +26,7 @@ class Cormack:
         self.primary_file_size = primary_file_size
         
         self.directory: List[Bucket] = [None] * DIRECTORY_SIZE
-        self.primary_file: List[PrimaryFileRecord] = [None] * PRIM_FILE_SIZE
+        self.primary_file: List[Record] = [None] * PRIM_FILE_SIZE
 
         # Ptr to primary file, after which there is free space
         # we don't reuse space for simplicity
@@ -48,7 +39,7 @@ class Cormack:
     def h_i(self, k: int, i: int, r: int) -> int:
         return (k >> i) % r
 
-    def get_records_in_bucket(self, dir_pos: int) -> Iterator[PrimaryFileRecord]:
+    def get_records_in_bucket(self, dir_pos: int) -> Iterator[Record]:
         bucket = self.directory[dir_pos]
 
         for r_i in range(bucket.r):
@@ -61,7 +52,7 @@ class Cormack:
         # for i, rec in records:
             # self.primary_file[i + offset] = 
         
-    def find_perfect_hashing_fn(self, records: List[PrimaryFileRecord]) -> Tuple[int, int]:
+    def find_perfect_hashing_fn(self, records: List[Record]) -> Tuple[int, int]:
         """Finds (i,r), such that h_i(record.key, i, r) don't collide"""
 
         # always start with r == number of records to perfect-hash
@@ -86,10 +77,10 @@ class Cormack:
         bucket = self.directory[self.h(key)]
         return self.h_i(key, bucket.i, bucket.r) + bucket.p
 
-    def lookup(self, key: int) -> PrimaryFileRecord:
+    def lookup(self, key: int) -> Record:
         return self.primary_file[self.get_primary_file_ptr(key)]
 
-    def insert(self, record: PrimaryFileRecord) -> None:
+    def insert(self, record: Record) -> None:
         """inserts data record into primary file based on it's hash key"""
 
         dir_pos = self.h(record.key)
@@ -141,7 +132,7 @@ if __name__ == "__main__":
 
     print("Inserting data records...")
     for rec in DATA_RECORDS:
-        cormack.insert(PrimaryFileRecord(rec.age, rec))
+        cormack.insert(Record(rec.age, rec))
 
 
     print("\n\nRecords lookup:")
