@@ -8,4 +8,4 @@
     - Linear hashing
 
 
-When in trouble, what relevant [YouTube videos](https://www.youtube.com/playlist?list=PLs_965odMumfDxeuVX9TQnqGOomGf0ulE)
+When in trouble, watch relevant [YouTube videos](https://www.youtube.com/playlist?list=PLs_965odMumfDxeuVX9TQnqGOomGf0ulE)
