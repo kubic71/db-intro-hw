@@ -134,6 +134,7 @@ class Cormack:
 if __name__ == "__main__":
     from db_intro_hw.hw1 import DATA_RECORDS, print_records
     print("Records to insert:\n", "\n".join(list(map(str, DATA_RECORDS))))
+    print()
     
     cormack = Cormack()
     # Test inserting all records by "age" key
@@ -143,7 +144,7 @@ if __name__ == "__main__":
         cormack.insert(PrimaryFileRecord(rec.age, rec))
 
 
-    print("\nRecords lookup:")
+    print("\n\nRecords lookup:")
     for rec in DATA_RECORDS:
         print(f"Searching for age={rec.age}")
         print(cormack.lookup(rec.age).data)
