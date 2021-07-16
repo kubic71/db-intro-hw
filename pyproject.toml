@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "db_intro_hw"
+version = "0.1.0"
+description = "Package with the homework assignment solutions for the Database access methods (NDBI007 2020)"
+authors = ["Jakub Hejhal <kubic71@gmail.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
